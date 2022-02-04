@@ -11,7 +11,7 @@ function Login({ navigation }) {
       
       <View style={styles.login}>
         <TouchableOpacity onPress={() => navigation.navigate("Iformation")}>
-          <Text style= {{width: 300, paddingHorizontal: 73, backgroundColor: "yellow", fontSize: 30, alignItems: 'center'}}>카카오 로그인</Text>
+          <Text style= {{width: 300, paddingHorizontal: 73, backgroundColor: "#FEE500", fontSize: 30, alignItems: 'center'}}>카카오 로그인</Text>
         </TouchableOpacity>
       </View>
 
