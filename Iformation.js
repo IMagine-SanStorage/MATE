@@ -2,40 +2,42 @@ import React, {useState} from "react";
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, Button, StyleSheet, ScrollView, Image, TextInput, TouchableOpacity } from "react-native";
 import { Fontisto } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons';
+import Ticket from './Ticket';
 
-const list_obj = {
+const list_obj = { // 티켓 목록 정보들 
     카풀: {
         name : ['Son', 'Kim', 'Lee', 'Jon', 'June', 'Park'],
         department: ['항공소프트웨어공학과', '무인기공학과', '간호학과', '항공기계공학과', '경호학과', '경호학과'], // 학과
         local : ['인동'],
     },
     택시: {
-        name : ['Son', 'Lee', 'Jon'],
-        department: ['항공소프트웨어공학과', '간호학과', '항공기계공학과'], // 학과
+        name : ['Son', 'Lee', 'Jon', 'Tom', 'Park', 'Jane'],
+        department: ['항공소프트웨어공학과', '간호학과', '항공기계공학과', '물리치료학과', '경호학과', '항공기계공학과'], // 학과
         local : ['인동'],
     },
     배달: {
-        name : ['Kim', 'Lee', 'Jon'],
-        department: ['무인기공학과', '간호학과', '항공기계공학과'], // 학과
+        name : ['Kim', 'Lee', 'Jon', 'Che', 'Tom', 'Jane'],
+        department: ['무인기공학과', '간호학과', '항공기계공학과', '항공소프트웨어공학과', '물리치료학과', '항공기계공학과'], // 학과
         local : ['인동'],
     },
     버스: {
-        name : ['Son', 'Kim'],
-        department: ['항공소프트웨어공학과', '무인기공학과'], // 학과
+        name : ['Park', 'Kim', 'Mike', 'Tom', 'Lee', 'Che'],
+        department: ['경호학과', '무인기공학과', '항공전자공학과', '물리치료학과', '간호학과', '항공소프트웨어공학과'], // 학과
         local : ['인동'],
     },
 };
 
-function Iformation({ navigation }) {
-    const [carpool_selecting, setCarpoolSelect] = useState(false);
-    const [taxi_selecting, setTaxiSelect] = useState(false);
-    const [deliver_selecting, setDeliverSelect] = useState(false);
-    const [bus_selecting, setBusSelect] = useState(false);
+
+function Iformation({ navigation }) { // 정보 메인 부분
+    const [carpool_selecting, setCarpoolSelect] = useState(true); // 카풀 선택일때 true, 아니면 false
+    const [taxi_selecting, setTaxiSelect] = useState(false); //택시 선택일때 true, 아니면 false
+    const [deliver_selecting, setDeliverSelect] = useState(false); //배달 선택일때 true, 아니면 false
+    const [bus_selecting, setBusSelect] = useState(false); // 버스 선택일때 true, 아니면 false
     
     function selectName() {
         if (carpool_selecting === true) {
-            return (Object.keys(list_obj)[0]);
+            return (Object.keys(list_obj)[0]); // 키값 배열중 요소 선택
         }
         else if (taxi_selecting === true) {
             return (Object.keys(list_obj)[1]);
@@ -47,26 +49,26 @@ function Iformation({ navigation }) {
             return (Object.keys(list_obj)[3]);
         }
     }
-
-    const carpool_select = () => {
+    
+    const carpool_select = () => { // 카풀 선택
         setCarpoolSelect(true);
         setTaxiSelect(false)
         setDeliverSelect(false)
         setBusSelect(false)
     };
-    const taxi_select = () => {
+    const taxi_select = () => { // 택시 선택
         setCarpoolSelect(false);
         setTaxiSelect(true)
         setDeliverSelect(false)
         setBusSelect(false)
     };
-    const deliver_select = () => {
+    const deliver_select = () => { // 배달 선택
         setCarpoolSelect(false);
         setTaxiSelect(false)
         setDeliverSelect(true)
         setBusSelect(false)
     };
-    const bus_select = () => {
+    const bus_select = () => { // 버스 선택
         setCarpoolSelect(false);
         setTaxiSelect(false)
         setDeliverSelect(false)
@@ -119,119 +121,131 @@ function Iformation({ navigation }) {
                 </View>
             </View>
         </View>
-
+    
         <ScrollView style={styles.carpool}>
-            <View style={styles.carpool_text}>
-                <Image style={styles.info_profile} source={require('./profile_img1.jpeg')}/>
-                <View style={styles.info_text_container}>
-                    <Text style={styles.info_text1}>{list_obj['카풀']['name'][0]}</Text>
-                    <Text style={styles.info_text2}>{list_obj['카풀']['department'][0]}</Text>
-                </View>
-                <View style={styles.info_carpool_container}>
-                    <Text style={styles.info_carpool_text}>{selectName()}</Text>
-                    <View style={styles.pointvar}/>
-                </View>
-                <View>
-                    <Text style={styles.info_text_local}>{list_obj['카풀']['local'][0]}</Text>
-                    <Text style={styles.info_time_text}>09:40</Text>
-                </View>
-                <View style={styles.count_container}>
-                    <Text>1/4</Text>
-                </View>
-            </View>
-
-            <View style={styles.carpool_text}>
-                <Image style={styles.info_profile} source={require('./profile_img1.jpeg')}/>
-                <View style={styles.info_text_container}>
-                    <Text style={styles.info_text1}>{list_obj['카풀']['name'][1]}</Text>
-                    <Text style={styles.info_text2}>{list_obj['카풀']['department'][1]}</Text>
-                </View>
-                <View style={styles.info_carpool_container}>
-                    <Text style={styles.info_carpool_text}>{selectName()}</Text>
-                    <View style={styles.pointvar}/>
-                </View>
-                <View>
-                    <Text style={styles.info_text_local}>{list_obj['카풀']['local'][0]}</Text>
-                    <Text style={styles.info_time_text}>09:40</Text>
-                </View>
-                <View style={styles.count_container}>
-                    <Text>1/4</Text>
+            <View style={{alignItems: "center",}}>
+                <View style={styles.carpool_text}>
+                    <Image style={styles.info_profile} source={require('./profile_img1.jpeg')}/>
+                    <View style={styles.info_text_container}>
+                        <Text style={styles.info_text1}>{list_obj[selectName()]['name'][0]}</Text>
+                        <Text style={styles.info_text2}>{list_obj[selectName()]['department'][0]}</Text>
+                    </View>
+                    <View style={styles.info_carpool_container}>
+                        <Text style={styles.info_carpool_text}>{selectName()}</Text>
+                        <View style={styles.pointvar}/>
+                    </View>
+                    <View>
+                        <Text style={styles.info_text_local}>{list_obj['카풀']['local'][0]}</Text>
+                        <Text style={styles.info_time_text}>09:40</Text>
+                    </View>
+                    <View style={styles.count_container}>
+                        <Text>1/4</Text>
+                    </View>
                 </View>
             </View>
 
-            <View style={styles.carpool_text}>
-                <Image style={styles.info_profile} source={require('./profile_img1.jpeg')}/>   
-                <View style={styles.info_text_container}>
-                    <Text style={styles.info_text1}>{list_obj['카풀']['name'][2]}</Text>
-                    <Text style={styles.info_text2}>{list_obj['카풀']['department'][2]}</Text>
+            <View style={{alignItems: "center",}}>
+                <View style={styles.carpool_text}>
+                    <Image style={styles.info_profile} source={require('./profile_img1.jpeg')}/>
+                    <View style={styles.info_text_container}>
+                        <Text style={styles.info_text1}>{list_obj[selectName()]['name'][1]}</Text>
+                        <Text style={styles.info_text2}>{list_obj[selectName()]['department'][1]}</Text>
+                    </View>
+                    <View style={styles.info_carpool_container}>
+                        <Text style={styles.info_carpool_text}>{selectName()}</Text>
+                        <View style={styles.pointvar}/>
+                    </View>
+                    <View>
+                        <Text style={styles.info_text_local}>{list_obj[selectName()]['local'][0]}</Text>
+                        <Text style={styles.info_time_text}>09:40</Text>
+                    </View>
+                    <View style={styles.count_container}>
+                        <Text>1/4</Text>
+                    </View>
                 </View>
-                <View style={styles.info_carpool_container}>
-                    <Text style={styles.info_carpool_text}>{selectName()}</Text>
-                    <View style={styles.pointvar}/>
+            </View>
+           
+            <View style={{alignItems: "center",}}>
+                <View style={styles.carpool_text}>
+                    <Image style={styles.info_profile} source={require('./profile_img1.jpeg')}/>   
+                    <View style={styles.info_text_container}>
+                        <Text style={styles.info_text1}>{list_obj[selectName()]['name'][2]}</Text>
+                        <Text style={styles.info_text2}>{list_obj[selectName()]['department'][2]}</Text>
+                    </View>
+                    <View style={styles.info_carpool_container}>
+                        <Text style={styles.info_carpool_text}>{selectName()}</Text>
+                        <View style={styles.pointvar}/>
+                    </View>
+                    <View>
+                        <Text style={styles.info_text_local}>{list_obj[selectName()]['local'][0]}</Text>
+                        <Text style={styles.info_time_text}>09:40</Text>
+                    </View>
+                    <View style={styles.count_container}>
+                        <Text>1/4</Text>
+                    </View>
                 </View>
-                <View>
-                    <Text style={styles.info_text_local}>{list_obj['카풀']['local'][0]}</Text>
-                    <Text style={styles.info_time_text}>09:40</Text>
+            </View>
+            
+            <View style={{alignItems: "center",}}>
+                <View style={styles.carpool_text}>
+                    <Image style={styles.info_profile} source={require('./profile_img1.jpeg')}/>
+                    <View style={styles.info_text_container}>
+                        <Text style={styles.info_text1}>{list_obj[selectName()]['name'][3]}</Text>
+                        <Text style={styles.info_text2}>{list_obj[selectName()]['department'][3]}</Text>
+                    </View>
+                    <View style={styles.info_carpool_container}>
+                        <Text style={styles.info_carpool_text}>{selectName()}</Text>
+                        <View style={styles.pointvar}/>
+                    </View>
+                    <View>
+                        <Text style={styles.info_text_local}>{list_obj[selectName()]['local'][0]}</Text>
+                        <Text style={styles.info_time_text}>09:40</Text>
+                    </View>
+                    <View style={styles.count_container}>
+                        <Text>1/4</Text>
+                    </View>
                 </View>
-                <View style={styles.count_container}>
-                    <Text>1/4</Text>
+            </View>
+            
+            <View style={{alignItems: "center",}}>
+                <View style={styles.carpool_text}>
+                    <Image style={styles.info_profile} source={require('./profile_img1.jpeg')}/>
+                    <View style={styles.info_text_container}>
+                        <Text style={styles.info_text1}>{list_obj[selectName()]['name'][4]}</Text>
+                        <Text style={styles.info_text2}>{list_obj[selectName()]['department'][4]}</Text>
+                    </View>
+                    <View style={styles.info_carpool_container}>
+                        <Text style={styles.info_carpool_text}>{selectName()}</Text>
+                        <View style={styles.pointvar}/>
+                    </View>
+                    <View>
+                        <Text style={styles.info_text_local}>{list_obj[selectName()]['local'][0]}</Text>
+                        <Text style={styles.info_time_text}>09:40</Text>
+                    </View>
+                    <View style={styles.count_container}>
+                        <Text>1/4</Text>
+                    </View>
                 </View>
             </View>
 
-            <View style={styles.carpool_text}>
-                <Image style={styles.info_profile} source={require('./profile_img1.jpeg')}/>
-                <View style={styles.info_text_container}>
-                    <Text style={styles.info_text1}>{list_obj['카풀']['name'][3]}</Text>
-                    <Text style={styles.info_text2}>{list_obj['카풀']['department'][3]}</Text>
-                </View>
-                <View style={styles.info_carpool_container}>
-                    <Text style={styles.info_carpool_text}>{selectName()}</Text>
-                    <View style={styles.pointvar}/>
-                </View>
-                <View>
-                    <Text style={styles.info_text_local}>{list_obj['카풀']['local'][0]}</Text>
-                    <Text style={styles.info_time_text}>09:40</Text>
-                </View>
-                <View style={styles.count_container}>
-                    <Text>1/4</Text>
-                </View>
-            </View>
-
-            <View style={styles.carpool_text}>
-                <Image style={styles.info_profile} source={require('./profile_img1.jpeg')}/>
-                <View style={styles.info_text_container}>
-                    <Text style={styles.info_text1}>{list_obj['카풀']['name'][4]}</Text>
-                    <Text style={styles.info_text2}>{list_obj['카풀']['department'][4]}</Text>
-                </View>
-                <View style={styles.info_carpool_container}>
-                    <Text style={styles.info_carpool_text}>{selectName()}</Text>
-                    <View style={styles.pointvar}/>
-                </View>
-                <View>
-                    <Text style={styles.info_text_local}>{list_obj['카풀']['local'][0]}</Text>
-                    <Text style={styles.info_time_text}>09:40</Text>
-                </View>
-                <View style={styles.count_container}>
-                    <Text>1/4</Text>
-                </View>
-            </View>
-
-            <View style={styles.carpool_text}>
-                <Image style={styles.info_profile} source={require('./profile_img1.jpeg')}/>
-                <View style={styles.info_text_container}>
-                    <Text style={styles.info_text1}>{list_obj['카풀']['name'][5]}</Text>
-                    <Text style={styles.info_text2}>{list_obj['카풀']['department'][5]}</Text>
-                </View>
-                <View style={styles.info_carpool_container}>
-                    <Text style={styles.info_carpool_text}>{selectName()}</Text>
-                    <View style={styles.pointvar}/>
-                </View>
-                <View>
-                    <Text style={styles.info_text_local}>{list_obj['카풀']['local'][0]}</Text>
-                    <Text style={styles.info_time_text}>09:40</Text>
-                </View>
-                <View style={styles.count_container}>
-                    <Text>1/4</Text>
+            <View style={{alignItems: "center",}}>
+                <View style={styles.carpool_text}>
+                    <Image style={styles.info_profile} source={require('./profile_img1.jpeg')}/>
+                    <View style={styles.info_text_container}>
+                        <Text style={styles.info_text1}>{list_obj[selectName()]['name'][5]}</Text>
+                        <Text style={styles.info_text2}>{list_obj[selectName()]['department'][5]}</Text>
+                    </View>
+                    <View style={styles.info_carpool_container}>
+                        <Text style={styles.info_carpool_text}>{selectName()}</Text>
+                        <View style={styles.pointvar}/>
+                    </View>
+                    <View>
+                        <Text style={styles.info_text_local}>{list_obj[selectName()]['local'][0]}</Text>
+                        <Text style={styles.info_time_text}>09:40</Text>
+                    </View>
+                    <View style={styles.count_container}>
+                        <Text>1/4</Text>
+                    </View>
                 </View>
             </View>
         </ScrollView>
@@ -239,7 +253,9 @@ function Iformation({ navigation }) {
         <View style={styles.footer}>
             <Fontisto name="comment" size={24} color="black" style={styles.messege_icon}/>
             <Fontisto name="home" size={24} color="black" style={styles.home_icon}/>
-            <Fontisto name="plus-a" size={24} color="black" style={styles.plus_icon}/>
+            <TouchableOpacity onPress={() => navigation.navigate("Ticket")}>
+                <Fontisto name="plus-a" size={24} color="black" style={styles.plus_icon}/>
+            </TouchableOpacity>
             <Fontisto name="bookmark" size={24} color="black" style={styles.save_icon}/>
             <Ionicons name="person-outline" size={24} color="black" style={styles.profile_icon}/>
         </View>
@@ -312,6 +328,7 @@ const styles = StyleSheet.create({
     },
     text_input_container: {
         flexDirection: 'row',
+        alignItems: 'center',
     },
     input_start: {
         width: 137.5,
@@ -379,9 +396,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         marginBottom: 14,
         flexDirection: 'row',
-        marginLeft: 23,
-        marginRight: 16,
-
+       
     },
     info_text1: {
         width: 31,
@@ -409,7 +424,7 @@ const styles = StyleSheet.create({
     },
     info_carpool_container: {
         marginTop: 14,
-        width:80,
+        width: 65,
         height: 30,
         alignItems: 'center',
         justifyContent: 'center'
