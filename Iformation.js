@@ -85,41 +85,44 @@ function Iformation({ navigation }) { // 정보 메인 부분
                     <Fontisto style={styles.bell_icon} name="bell" size={24} color="black" />
                 </View>
             </View>
-            <View style={styles.text_input_container}>
-                <TextInput style={styles.input_start} placeholder='출발지'/>
-                <Fontisto  style={{transform:[{ rotate: '90deg'}], marginTop: 13.5, marginLeft: 22}}name="plane" size={24} color="black" />
-                <TextInput style={styles.input_start} placeholder='도착지'/>
-            </View>
-            <View style={styles.selection_container}>
-                <View style={styles.selection_text}>
-                
-                    <View style={styles.selection_text_carpool}>
-                        <TouchableOpacity onPress={carpool_select}>
-                            <Text style={{width: 26.42, height: 13.39, fontSize: 17, marginLeft: 10,}}>카풀</Text>
-                        </TouchableOpacity>
-                        <View style={{...styles.status_bar, backgroundColor: carpool_selecting ? "#315EFF" : "#C4C4C4"}}/>
-                    </View>
-                    <View style={styles.selection_text_taxi}>
-                        <TouchableOpacity onPress={taxi_select}>
-                            <Text style={{width: 26.42, height: 13.39, fontSize: 17, marginLeft: 10}}>택시</Text>
-                        </TouchableOpacity>
-                        <View style={{...styles.status_bar, backgroundColor: taxi_selecting ? "#315EFF" : "#C4C4C4"}}/>
-                    </View>
-                    <View style={styles.selection_text_delivery}>
-                        <TouchableOpacity onPress={deliver_select}>
-                            <Text style={{width: 26.42, height: 13.39, fontSize: 17, marginLeft: 10}}>배달</Text>
-                        </TouchableOpacity>
-                        <View style={{...styles.status_bar, backgroundColor: deliver_selecting ? "#315EFF" : "#C4C4C4"}}/>
-                    </View>
-                    <View style={styles.selection_text_bus}>
-                        <TouchableOpacity onPress={bus_select}>
-                            <Text style={{width: 26.42, height: 13.39, fontSize: 17, marginLeft: 10}}>버스</Text>
-                        </TouchableOpacity>
-                        <View style={{...styles.status_bar, backgroundColor: bus_selecting ? "#315EFF" : "#C4C4C4"}}/>
-                    </View>
-
+            <View style={{alignItems: 'center',}}>
+                <View style={styles.text_input_container}>
+                    <TextInput style={styles.input_start} placeholder='출발지'/>
+                    <Fontisto  style={{transform:[{ rotate: '90deg'}], marginTop: 13.5, marginLeft: 22}}name="plane" size={24} color="black" />
+                    <TextInput style={styles.input_start} placeholder='도착지'/>
                 </View>
             </View>
+            <View style={{alignItems: 'center',}}>
+                <View style={styles.selection_container}>
+                    <View style={styles.selection_text}>
+                        <View style={styles.selection_text_carpool}>
+                            <TouchableOpacity onPress={carpool_select}>
+                                <Text style={{width: 26.42, height: 13.39, fontSize: 17, marginLeft: 10,}}>카풀</Text>
+                            </TouchableOpacity>
+                            <View style={{...styles.status_bar, backgroundColor: carpool_selecting ? "#315EFF" : "#C4C4C4"}}/>
+                        </View>
+                        <View style={styles.selection_text_taxi}>
+                            <TouchableOpacity onPress={taxi_select}>
+                                <Text style={{width: 26.42, height: 13.39, fontSize: 17, marginLeft: 10}}>택시</Text>
+                            </TouchableOpacity>
+                            <View style={{...styles.status_bar, backgroundColor: taxi_selecting ? "#315EFF" : "#C4C4C4"}}/>
+                        </View>
+                        <View style={styles.selection_text_delivery}>
+                            <TouchableOpacity onPress={deliver_select}>
+                                <Text style={{width: 26.42, height: 13.39, fontSize: 17, marginLeft: 10}}>배달</Text>
+                            </TouchableOpacity>
+                            <View style={{...styles.status_bar, backgroundColor: deliver_selecting ? "#315EFF" : "#C4C4C4"}}/>
+                        </View>
+                        <View style={styles.selection_text_bus}>
+                            <TouchableOpacity onPress={bus_select}>
+                                <Text style={{width: 26.42, height: 13.39, fontSize: 17, marginLeft: 10}}>버스</Text>
+                            </TouchableOpacity>
+                            <View style={{...styles.status_bar, backgroundColor: bus_selecting ? "#315EFF" : "#C4C4C4"}}/>
+                        </View>
+                    </View>
+                </View>
+            </View>
+                
         </View>
     
         <ScrollView style={styles.carpool}>
@@ -346,7 +349,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         marginTop: 22,
         borderRadius: 8,
-        marginLeft: 15,
     },
     selection_text: {
         flexDirection: 'row',

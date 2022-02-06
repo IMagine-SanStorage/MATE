@@ -13,7 +13,7 @@ function Home({ navigation }) {
         onPress={() => navigation.navigate("Login")}
       />
         <StatusBar style="auto" />
-      </View>
+    </View>
   );
 }
 
